@@ -22,7 +22,7 @@ function source:complete(params, callback)
   init_options(params)
   if params.option.in_comment then
     local context = require("cmp.config.context")
-    local in_comment = context.in_syntax_group("Comment")
+    local in_comment = context.in_syntax_group("@comment") or context.in_syntax_group("Comment")
     if not in_comment then
       callback({})
       return
