@@ -31,7 +31,7 @@ function source:complete(params, callback)
   local diags = {}
   local hash = {}
   for _, value in ipairs(vim.diagnostic.get(0)) do
-    if not hash[value.code] then
+    if value.code ~= nil and not hash[value.code] then
       table.insert(diags, { label = value.code })
       hash[value.code] = 1
     end
