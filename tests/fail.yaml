@@ -1,0 +1,9 @@
+mypy:
+  script:
+    - poetry run mypy py_utils
+
+# 0
+mypy:
+  script:
+    - poetry run mypy py_utils
+

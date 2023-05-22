@@ -6,6 +6,7 @@ local defaults = {
 
 -- the options are being passed via cmp.setup.sources, e.g.
 -- require('cmp').setup { sources = { { name = 'diag-codes', opts = {...} } } }
+
 local function init_options(params)
   params.option = vim.tbl_deep_extend("keep", params.option, defaults)
   vim.validate({
@@ -31,9 +32,12 @@ function source:complete(params, callback)
   local diags = {}
   local hash = {}
   for _, value in ipairs(vim.diagnostic.get(0)) do
-    if value.code ~= nil and not hash[value.code] then
-      table.insert(diags, { label = value.code })
-      hash[value.code] = 1
+    if value.code ~= nil then
+      local code = string.format("%s", value.code)
+      if not hash[code] then
+        table.insert(diags, { label = string.format("%s", code) })
+        hash[code] = 1
+      end
     end
   end
   callback(diags)
